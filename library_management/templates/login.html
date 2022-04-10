@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container">
+
+        <div class="">
+            <div class="col">
+                <h3 class= "alert border rounded mt-4 mb-4"> Login</h3>
+                <form action="/" method="POST">
+                    
+                    {% csrf_token %}
+                    
+                    <!-- email -->
+                    <div class="form-group">
+                      <label for="">Email</label>
+                      <input type="email" name="email" id="" value="" class="form-control " placeholder="example@gmail.com">
+                    </div>
+
+                    <!-- password -->
+                    <div class="form-group">
+                        <label for="">Password</label>
+                        <input type="password" name="password" id="" class="form-control" placeholder="**********">
+                      </div>
+                      <div class="container">
+                      <div class="row">
+                          <div class="col-7">
+                      <div class="from-group my-2">
+                          <input class=" btn-primary " type="submit" value="Login">
+                          </div>
+                          <div class="col">
+                            <div class="from-group my-2">
+                                <a class="" style="text-align: left;" href="/signup" role="button">Signup</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </form>
+                
+            </div>
+
+        </div>
+    </div>
+
+{% endblock  %}

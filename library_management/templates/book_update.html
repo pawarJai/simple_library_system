@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="layoutSidenav_content">
+    <main>
+        <div id="layoutAuthentication">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-7">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                    <div class="card-header">
+                                        <h3 class="text-center font-weight-light my-4">Update Book</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <form method="post" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <div class="row mb-3">
+                                                
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <option value="">Category</option>
+                                                        <select name="category" required id="category" class="form-control">
+                                                            {% for category in category_data %}
+                                                            <option value="{{category.id}}" {%if category.label == book_data.category.label %} selected {%endif%}> 
+                                                                {{category.label}}
+                                                            </option>
+                                                            {%endfor%}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="inputEntryCode">Book Name</label>
+                                                        <input class="form-control" name="name"
+                                                             value="{{book_data.name}}" type="text" placeholder="book name" />
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        {%if book_data.book_image %}
+                                                    <img src="{{book_data.book_image.url}}" style="padding: 5px;
+                                                            width: 150px;" class="card-img-top" alt="...">
+                                                                {%endif%}
+                                                        <label for="">Book</label>
+                                                        {%if super_admin%}
+                                                         <input type="file" name="book_image" value="{{book_data.book_image}}" id="book_image"> 
+                                                         {%endif%}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3 mb-md-0">
+                                                        <label for="inputMobileNo">Author Name</label>
+                                                        <input class="form-control" name="author_name"
+                                                             value="{{book_data.author_name}}" type="text" placeholder="author name" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mt-4 mb-0">
+
+                                            <div class="d-grid">
+                                                {%if super_admin%}
+                                                <input class="btn btn-sm btn-primary" type="submit" value="Update Book"></div>
+                                                {%endif%}
+                                            </div>
+                                            </div>
+                                            <div class="row mb-2">
+                                                <div class="col-md-12">
+                                                    <div class="form-group mb-3 mb-md-0">
+                                                    </div>
+                                                </div>
+                                        </form>
+                                    </div>
+                                    <div class="card-footer text-center py-3">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+
+        </div>
+    </main>
+</div>
+
+
+{% endblock %}

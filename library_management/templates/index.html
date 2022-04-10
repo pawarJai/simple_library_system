@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    {%if super_admin%}
+<a class="btn btn-primary" style="text-align: left;" href="/addbook" role="button">Add Book</a>
+{%endif%}
+</div>
+<div class="container">
+
+    <div class="my-2">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Book Name</th>
+                    <th scope="col">Book Outher</th>
+                    <th scope="col">Book Image </th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Date</th>
+                    {%if super_admin%}
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
+                    {%endif%}
+                    {%if not super_admin%}
+                    <th scope="col">View</th>
+                    {%endif%}
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in book_data %}
+                <tr>
+                    <td>{{book.name}}</td>
+                    <td>{{book.author_name}}</td>
+                    <td>
+                        {%if book.book_image %}
+                        <img src="{{book.book_image.url}}" style="padding: 5px;
+                        width: 150px;" class="card-img-top" alt="...">
+                        {%endif%}
+                    </td>
+                    <td>{{book.category}}</td>
+                    <td>{{book.created_at}}</td>
+                    {%if super_admin %}
+                    <td>
+                        <div class="card-footer text-center py-3">
+                            <div class="small"><a href="/updatebook/{{book.id}}">Update</a></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <form action="/deletebook/{{book.id}}" role="form" method="post" class="delete_book">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger" > delete </button>
+                            </form>
+                        </div>
+                    </td>
+                    {%endif%}
+
+                    {%if not super_admin %}
+                    <td>
+                        <div class="card-footer text-center py-3">
+                            <div class="small"><a href="/updatebook/{{book.id}}">View</a></div>
+                        </div>
+                    </td>
+                    {%endif%}
+                        
+                </tr>
+                {%endfor%}
+                                                
+                </div>
+    </div>
+
+    <script>
+$(document).ready(function () {
+    $(".delete_book").on("submit", function (event) {
+        event.preventDefault();
+        result = confirm("Are Sure To Delete This Book ?");
+        if (result) {
+            $(this).unbind('submit');
+            $(this).removeClass("delete");
+            $(this).submit();
+        }
+    });
+});
+    </script>
+{% endblock%}

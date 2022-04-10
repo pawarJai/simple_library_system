@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="p-4 ">
+        <div class="  p-3 pt-5 col-lg-5 mx-auto border rounded  ">
+            <h4 class="alert alert-light border rounded">Create an account</h4>
+            <form action="/signup" method="POST">
+              {% csrf_token %}
+                <!-- Fist Name -->
+                <div class="form-group  ">
+                    <label for="">First Name</label>
+                    <input type="text" name="firstname" value="" id="" class="form-control " placeholder="" >
+                  </div>
+
+                <!--Last Name  -->
+                  <div class="form-group">
+                    <label for="">Last Name</label>
+                    <input type="text" name="lastname" value="" id="" class="form-control " placeholder="" >
+                  </div>
+
+
+                <!-- Email -->
+
+                <div class="form-group">
+                  <label for="">Email</label>
+                  <input required type="email" value=""  name="email" id="" class="form-control " placeholder="your@gmail.com" >
+                </div>
+
+                <!-- password -->
+                <div class="form-group">
+                    <label for="">password</label>
+                    <input type="password" name="password" id="" class="form-control " placeholder="********" >
+                  </div>
+
+                  <!-- button -->
+                  <div class="form-group my-2">
+                      <input class="btn btn-sm btn-primary" type="submit" value="Crate account">
+                  </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
